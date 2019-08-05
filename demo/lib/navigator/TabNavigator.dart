@@ -30,6 +30,7 @@ class _TabNavigatorState extends State<TabNavigator> {
     return Scaffold(
       body: PageView(
         controller: _controller,
+        physics: NeverScrollableScrollPhysics(),  // 禁止滚动
         children: <Widget>[
           HomePage(),
           LoanListPage(),
