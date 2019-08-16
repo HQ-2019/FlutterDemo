@@ -16,6 +16,8 @@ class _HomePageState extends State<HomePage> {
     'https://img1.mukewang.com/szimg/5d36a6000837a91d06000338.jpg'
   ];
 
+  String run() => 'ssss';
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -25,7 +27,8 @@ class _HomePageState extends State<HomePage> {
           '首页',
           style: TextStyle(
             fontSize: 17.0,
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
+            color: Colors.white
           ),
         ),
         backgroundColor: Colors.blue,
@@ -38,7 +41,9 @@ class _HomePageState extends State<HomePage> {
               height: 200,
               child: Swiper(
                 itemCount: _imageUrlList.length,  // 轮播个数
+                duration: 500,  // 设置每一次轮播的动画的持续时长(毫秒)
                 autoplay: true, // 自动轮播
+                autoplayDelay: 3000, // 设置轮播时间间隔(毫秒)
                 // 设置轮播的图片
                 itemBuilder: (context, index) {
                   return Image.network(
@@ -53,5 +58,28 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+// 创建一个类
+class Person {
+  String name;
+  int age;
+//  final double weight;
+
+  String run() {
+    print('runner is $name, age: $age');
+    return 'runner is $name, age: $age';
+  }
+
+//  var wall = Wall();
+//  wall.width = 10;
+}
+
+class Wall {
+  num width, height;
+
+  num area() {
+    return width * height;
   }
 }

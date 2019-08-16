@@ -10,7 +10,7 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> {
 
   // 创建列表数据
-  final _todoList = List<Todo>.generate(20, (i) => Todo('Title $i', 'this is a subTitle '));
+  final _todoList = List<Todo>.generate(100, (i) => Todo('Title $i', 'this is a subTitle '));
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,8 @@ class _MyPageState extends State<MyPage> {
           '我的',
           style: TextStyle(
               fontSize: 17.0,
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
+              color: Colors.white
           ),
         ),
         backgroundColor: Colors.red,
@@ -57,7 +58,6 @@ class _MyPageState extends State<MyPage> {
 class Todo {
   final String title;
   final String subTitle;
-
   // 构造函数
   Todo(this.title, this.subTitle);
 }
