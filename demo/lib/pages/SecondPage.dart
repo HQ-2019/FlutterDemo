@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SecondPage extends StatefulWidget {
   final String title;
 
-  const SecondPage({Key key,  @required this.title}) : super(key: key);
+  const SecondPage({Key key, @required this.title}) : super(key: key);
 
   @override
   _SecondPageState createState() => _SecondPageState(this.title);
@@ -28,11 +28,9 @@ class _SecondPageState extends State<SecondPage> {
         ),
         // 标题
         title: Text(
-          this.text,
-          style: TextStyle(
-            fontSize: 17.0,
-            fontWeight: FontWeight.bold
-          ),
+//          this.text,
+          widget.title,
+          style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.blue,
         elevation: 0, // 去掉阴影

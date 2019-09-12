@@ -4,7 +4,6 @@ import 'package:demo/pages/MyPage.dart';
 import 'package:flutter/material.dart';
 
 class TabNavigator extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -16,7 +15,6 @@ class TabNavigator extends StatefulWidget {
 }
 
 class _TabNavigatorState extends State<TabNavigator> {
-
   // tabbar默认状态颜色
   final _normalColor = Colors.grey;
   // tabbar选中状态颜色
@@ -40,22 +38,26 @@ class _TabNavigatorState extends State<TabNavigator> {
   );
 
   void initData() {
-      _iconList = [
-        [getImage('images/tab_home_icon_a@2x.png'), getImage('images/tab_home_icon_d@2x.png')],
-        [getImage('images/tab_me_icon_a@2x.png'), getImage('images/tab_me_icon_d@2x.png')],
-        [getImage('images/tab_zhangdan_icon_a@2x.png'), getImage('images/tab_zhangdan_icon_d@2x.png')]
-      ];
+    _iconList = [
+      [
+        getImage('images/tab_home_icon_a@3x.png'),
+        getImage('images/tab_home_icon_d@3x.png')
+      ],
+      [
+        getImage('images/tab_me_icon_a@3x.png'),
+        getImage('images/tab_me_icon_d@3x.png')
+      ],
+      [
+        getImage('images/tab_zhangdan_icon_a@3x.png'),
+        getImage('images/tab_zhangdan_icon_d@3x.png')
+      ]
+    ];
 
-      _pageList = [
-        HomePage(),
-        LoanListPage(),
-        MyPage()
-      ];
+    _pageList = [HomePage(), LoanListPage(), MyPage()];
   }
 
   @override
   Widget build(BuildContext context) {
-
     // 初始化数据
     initData();
 
@@ -63,19 +65,22 @@ class _TabNavigatorState extends State<TabNavigator> {
     return Scaffold(
       body: PageView(
         controller: _controller,
-        physics: NeverScrollableScrollPhysics(),  // 禁止滚动
+        physics: NeverScrollableScrollPhysics(), // 禁止滚动
         children: _pageList,
       ),
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          // 设置tabbar点击
-          onTap: (index) {
-            _controller.jumpToPage(index);
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        items: List.generate(3, (i) => BottomNavigationBarItem(icon: getTabIcon(i), title: getTabTitle(i))),
+        currentIndex: _currentIndex,
+        // 设置tabbar点击
+        onTap: (index) {
+          _controller.jumpToPage(index);
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: List.generate(
+            3,
+            (i) => BottomNavigationBarItem(
+                icon: getTabIcon(i), title: getTabTitle(i))),
 //          items: [
 //            BottomNavigationBarItem(
 //              icon: getTabIcon(0), title: getTabTitle(0)
@@ -105,7 +110,9 @@ class _TabNavigatorState extends State<TabNavigator> {
   Text getTabTitle(int index) {
     return Text(
       _titleList[index],
-      style: TextStyle(fontSize: 12, color: _currentIndex == index ? _seletedColor : _normalColor),
+      style: TextStyle(
+          fontSize: 12,
+          color: _currentIndex == index ? _seletedColor : _normalColor),
     );
   }
 
@@ -124,5 +131,4 @@ class _TabNavigatorState extends State<TabNavigator> {
   Image getImage(String path) {
     return Image.asset(path, width: 30.0, height: 30.0);
   }
-
 }
