@@ -4,14 +4,14 @@ import 'package:demo/pages/MyPage.dart';
 import 'package:flutter/material.dart';
 
 class TabNavigator extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _TabNavigatorState();
-  }
-
 //  @override
-//  _TabNavigatorState createState() => _TabNavigatorState();
+//  State<StatefulWidget> createState() {
+//    // TODO: implement createState
+//    return _TabNavigatorState();
+//  }
+
+  @override
+  _TabNavigatorState createState() => _TabNavigatorState();
 }
 
 class _TabNavigatorState extends State<TabNavigator> {
@@ -37,6 +37,10 @@ class _TabNavigatorState extends State<TabNavigator> {
     initialPage: 0, // 默认显示第1个
   );
 
+  /*
+   * 初始化数据源
+   * @author huangqun by 2019/9/27.
+   */
   void initData() {
     _iconList = [
       [
@@ -57,30 +61,90 @@ class _TabNavigatorState extends State<TabNavigator> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
     // 初始化数据
     initData();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: PageView(
-        controller: _controller,
-        physics: NeverScrollableScrollPhysics(), // 禁止滚动
-        children: _pageList,
+      body: buildPageView(),  // 构建页面
+      bottomNavigationBar: buildBottomNavigationBar(),  // 构建底部导航器
+    );
+  }
+
+  // 测试代码
+  List<Widget> testPageView() {
+    return <Widget>[
+      Container(
+        color: Colors.yellow,
+        child: Center(
+          child: Text(
+            '第一个pageView',
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
+          ),
+        ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        // 设置tabbar点击
-        onTap: (index) {
-          _controller.jumpToPage(index);
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: List.generate(
-            3,
-            (i) => BottomNavigationBarItem(
-                icon: getTabIcon(i), title: getTabTitle(i))),
+      Container(
+        color: Colors.red,
+        child: Center(
+          child: Text(
+            '第二个pageView',
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
+          ),
+        ),
+      ),
+      Container(
+        color: Colors.green,
+        child: Center(
+          child: Text(
+            '第三个pageView',
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
+          ),
+        ),
+      )
+    ];
+  }
+
+  /*
+   * 创建page页面
+   * @author huangqun by 2019/9/27.
+   */
+  Widget buildPageView() {
+    return PageView(
+      controller: _controller,
+      physics: NeverScrollableScrollPhysics(), // 禁止滚动
+      children: _pageList,
+//        children: testPageView(),
+      onPageChanged: (index) {
+        print('页面切换到 index ${index}');
+      },
+    );
+  }
+
+  /*
+   * 创建底部导航器
+   * @author huangqun by 2019/9/27.
+   */
+  Widget buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      currentIndex: _currentIndex,
+      // 设置tabbar点击
+      onTap: (index) {
+        _controller.jumpToPage(index);
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      items: List.generate(
+          3,
+          (i) => BottomNavigationBarItem(
+              icon: getTabIcon(i), title: getTabTitle(i))),
 //          items: [
 //            BottomNavigationBarItem(
 //              icon: getTabIcon(0), title: getTabTitle(0)
@@ -99,7 +163,6 @@ class _TabNavigatorState extends State<TabNavigator> {
 //                )
 //            )
 //          ]
-      ),
     );
   }
 

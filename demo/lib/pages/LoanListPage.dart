@@ -16,7 +16,7 @@ class _LoanListPageState extends State<LoanListPage> {
           style: TextStyle(
               fontSize: 17.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.orange,
         elevation: 0, // 去掉阴影
       ),
       body: Center(

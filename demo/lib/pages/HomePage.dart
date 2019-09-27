@@ -14,26 +14,25 @@ class _HomePageState extends State<HomePage> {
     'https://img1.mukewang.com/szimg/5d36a6000837a91d06000338.jpg'
   ];
 
-  String run() => 'ssss';
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '首页',
-          style: TextStyle(
-              fontSize: 17.0, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        backgroundColor: Colors.blue,
-        elevation: 0, // 去掉阴影
-      ),
+//      appBar: AppBar(
+//        title: Text(
+//          '首页',
+//          style: TextStyle(
+//              fontSize: 17.0, fontWeight: FontWeight.bold, color: Colors.white),
+//        ),
+//        backgroundColor: Colors.blue,
+//        elevation: 0, // 去掉阴影
+//      ),
       body: Center(
         child: Column(
           children: <Widget>[
             Container(
               height: 200,
+              color: Colors.grey,
               child: Swiper(
                 itemCount: _imageUrlList.length, // 轮播个数
                 duration: 500, // 设置每一次轮播的动画的持续时长(毫秒)
@@ -48,33 +47,41 @@ class _HomePageState extends State<HomePage> {
                 },
                 pagination: SwiperPagination(), // 页码
               ),
+            ),
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  new ListTile(
+                    leading: Icon(Icons.label_important),
+                    title: Text('label_important'),
+                    subtitle: Text('label_important'),
+                  ),
+                  new ListTile(
+                    leading: Icon(Icons.gamepad),
+                    title: Text('gamepad'),
+                    subtitle: Text('gamepad'),
+                  ),
+                  new ListTile(
+                    leading: Icon(Icons.verified_user),
+                    title: Text('verified_user'),
+                    subtitle: Text('verified_user'),
+                  ),
+                  new ListTile(
+                    leading: Icon(Icons.dashboard),
+                    title: Text('dashboard'),
+                    subtitle: Text('dashboard'),
+                  ),
+                  new ListTile(
+                    leading: Icon(Icons.security),
+                    title: Text('security'),
+                    subtitle: Text('security'),
+                  ),
+                ],
+              ),
             )
           ],
         ),
       ),
     );
-  }
-}
-
-// 创建一个类
-class Person {
-  String name;
-  int age;
-//  final double weight;
-
-  String run() {
-    print('runner is $name, age: $age');
-    return 'runner is $name, age: $age';
-  }
-
-//  var wall = Wall();
-//  wall.width = 10;
-}
-
-class Wall {
-  num width, height;
-
-  num area() {
-    return width * height;
   }
 }
