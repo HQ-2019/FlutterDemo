@@ -34,13 +34,14 @@ class _MyPageState extends State<MyPage> {
               height: 120,
               margin: EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.all(Radius.circular(4.0)), // 设置圆角
+                image: DecorationImage(image: AssetImage('images/bg_me_top@3x.png'), fit: BoxFit.fill),
+//                color: Colors.orange,
+//                borderRadius: BorderRadius.all(Radius.circular(4.0)), // 设置圆角
 //                border: new Border.all(width: 1, color: Colors.green) // 设置边框
               ),
               child: Center(
                 child: Container(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment(-0.9, 0.0),
                   child: RaisedButton.icon(
                     onPressed: () {},
                     elevation: 0.0,
