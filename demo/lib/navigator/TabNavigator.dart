@@ -1,5 +1,5 @@
 import 'package:demo/pages/HomePage.dart';
-import 'package:demo/pages/LoanListPage.dart';
+import 'package:demo/pages/NewsPage.dart';
 import 'package:demo/pages/MyPage.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   int _currentIndex = 0;
 
   // tab标题列表
-  final _titleList = ['首页', '借款', '我的'];
+  final _titleList = ['首页', '资讯', '我的'];
 
   // tab图标列表
   var _iconList;
@@ -57,7 +57,7 @@ class _TabNavigatorState extends State<TabNavigator> {
       ]
     ];
 
-    _pageList = [HomePage(), LoanListPage(), MyPage()];
+    _pageList = [HomePage(), NewsPage(), MyPage()];
   }
 
   @override

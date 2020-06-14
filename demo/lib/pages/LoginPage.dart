@@ -69,10 +69,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  /*
-   * 重置跟视图,并清空堆栈中的页面
-   * @author huangqun by 2019/9/24.
-   */
+  // 重置跟视图,并清空堆栈中的页面
   void resetRootView() {
     Navigator.pushAndRemoveUntil(
         context,
@@ -80,10 +77,7 @@ class _LoginPageState extends State<LoginPage> {
         (route) => route == null);
   }
 
-  /*
-   * 创建标题视图
-   * @author huangqun by 2019/9/24.
-   */
+  // 创建标题视图
   Widget buildTitleView() {
     return Container(
         alignment: Alignment.centerLeft,
@@ -92,17 +86,14 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Text('您好',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-            Text('欢迎使用\"月光侠分期\"',
+            Text('欢迎使用\"Flutter\"',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
           ],
         )
     );
   }
 
-  /*
-   * 创建输入区域视图
-   * @author huangqun by 2019/9/24.
-   */
+  // 创建输入区域视图
   Widget buildInputView() {
     return Container(
       margin: EdgeInsets.only(top: 40),
@@ -118,10 +109,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  /*
-   * 手机输入视图
-   * @author huangqun by 2019/9/26.
-   */
+  // 手机输入视图
   Widget buildPhoneInputView() {
     return Container(
       child: Column(
@@ -137,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                 Expanded(
                   child: buildTextField(controller: phoneController, isPhone: true), // 手机号码输入框
                 ),
-                buildButton() // 验证码按钮
+                buildVerifyButton() // 验证码按钮
               ],
             ),
           )
@@ -146,10 +134,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  /*
-   * 验证码输入视图
-   * @author huangqun by 2019/9/26.
-   */
+  // 验证码输入视图
   Widget buildVerifyCodeIpnputView() {
     return Container(
       margin: EdgeInsets.only(top: 20),
@@ -166,10 +151,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  /*
-   * 协议区域视图
-   * @author huangqun by 2019/9/26.
-   */
+  // 协议区域视图
   Widget buildAgreementView() {
     return Container(
       padding: EdgeInsets.only(top: 10,right: 30),
@@ -194,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
               Expanded(
                 child: RichText(
                   text: TextSpan(
-                    text: '登录即表示同意并接受月光侠分期',
+                    text: '登录即表示同意并接Flutter',
                     style: TextStyle(color: Colors.black54, fontSize: 14.0),
                     children: <TextSpan>[
                       TextSpan(
@@ -225,10 +207,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  /* 文本输入框
-   *
-   * @author huangqun by 2019/9/26.
-   */
+  // 文本输入框
   Widget buildTextField({bool isPhone, TextEditingController controller}) {
     return TextField(
       controller: controller, // 监听键盘输入
@@ -254,11 +233,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  /*
-   * 构建一个带圆角的按钮
-   * @author huangqun by 2019/9/24.
-   */
-  Widget buildButton() {
+  // 构建一个带圆角的获取验证码按钮
+  Widget buildVerifyButton() {
     return Container(
       width: 100.0,
       height: 25.0,
@@ -272,31 +248,28 @@ class _LoginPageState extends State<LoginPage> {
         highlightElevation: 0,
         shape: RoundedRectangleBorder(
             side: BorderSide.none,
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+            borderRadius: BorderRadius.all(Radius.circular(10)), // 设置圆角
+        ),
         child:
             Text('获取验证码', style: TextStyle(color: Colors.white, fontSize: 12)),
-        onPressed: null,
+        onPressed: verifyButtonAction(),
       ),
     );
   }
 
-  /*
-   * 验证码按钮点击事件，为null时按钮为不可点击状态
-   * @author huangqun by 2019/9/27.
-   */
+  // 验证码按钮点击事件，为null时按钮为不可点击状态
   verifyButtonAction() {
-    if (verifyButtonEnabled) {
+    print('verifyButtonAction 被调用');
+    if (!verifyButtonEnabled) {
       return null; // 返回null时，按钮为禁止点击状态
     }
     return () {
-      // 执行点击事件
+      print('发送获取验证码请求');
+
     };
   }
 
-  /*
-   * 发送登录请求
-   * @author huangqun by 2019/9/26.
-   */
+  // 发送登录请求
   void requestLogin() {
     timer = new Timer(const Duration(milliseconds: 1500), () {
       try {

@@ -70,7 +70,12 @@ class _MyPageState extends State<MyPage> {
                           CupertinoPageRoute<void>(
                               maintainState: false, //  是否前一个路由将保留在内存中
                               builder: (BuildContext context) {
-                                return SecondPage(title: _todoList[index].title);
+                                return SecondPage(
+                                  title: _todoList[index].title,
+                                  onTap: (str) {
+                                    print('回调信息是 ${str}');
+                                  },
+                                );
                               }
                           )
                       );
