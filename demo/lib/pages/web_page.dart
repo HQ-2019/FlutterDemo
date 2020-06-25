@@ -26,6 +26,9 @@ class WebPage extends StatefulWidget {
 }
 
 class _WebPage extends State<WebPage> {
+  String _title = '网页';
+  WebViewController _viewController;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +39,7 @@ class _WebPage extends State<WebPage> {
         ),
 //        iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          '网页',
+          _title,
           style: TextStyle(
               color: Colors.white, fontSize: 17.0, fontWeight: FontWeight.bold),
         ),
@@ -46,9 +49,24 @@ class _WebPage extends State<WebPage> {
         initialUrl: 'https://www.baidu.com',
         // 启用javascipt
         javascriptMode: JavascriptMode.unrestricted,
+        onWebViewCreated: (controller) {
+          _viewController = controller;
+        },
+        onPageFinished: (url) {
+          // 页面加载完成后读取网页标题显示在导航栏上
+          _viewController?.evaluateJavascript('document.title')?.then((value) {
+            setState(() {
+              _title = value;
+            });
+          });
+        },
         // 监听webView代理
         navigationDelegate: (NavigationRequest request) {
-          if (request.url.startsWith('https://www.xxxx.com')) {
+          print('\n 是否允许加载url:${request.url}');
+          if (request.url.startsWith('someApp://')) {
+            // 拦截url
+            // to do something .....
+
             // 阻止加载web链接页面
             return NavigationDecision.prevent;
           }

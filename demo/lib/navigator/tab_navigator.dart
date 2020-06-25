@@ -2,6 +2,7 @@ import 'package:demo/pages/home_page.dart';
 import 'package:demo/pages/my_page.dart';
 import 'package:demo/pages/news_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TabNavigator extends StatefulWidget {
 //  @override
@@ -59,6 +60,18 @@ class _TabNavigatorState extends State<TabNavigator> {
     _pageList = [HomePage(), NewsPage(), MyPage()];
   }
 
+  //  设置沉浸式状态栏（去除android上的灰色背景,将背景设置为透明的）
+  void statusBar() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF000000),
+      systemNavigationBarDividerColor: null,
+      statusBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ));
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -66,18 +79,19 @@ class _TabNavigatorState extends State<TabNavigator> {
 
     // 初始化数据
     initData();
+
+    // 设置状态栏
+    statusBar();
   }
 
   @override
   Widget build(BuildContext context) {
-    initData();
     // TODO: implement build
     return Scaffold(
       body: buildPageView(), // 构建页面
       bottomNavigationBar: buildBottomNavigationBar(), // 构建底部导航器
     );
   }
-
 
   // 创建page页面
   Widget buildPageView() {
@@ -148,5 +162,4 @@ class _TabNavigatorState extends State<TabNavigator> {
   Image getImage(String path) {
     return Image.asset(path, width: 30.0, height: 30.0);
   }
-
 }

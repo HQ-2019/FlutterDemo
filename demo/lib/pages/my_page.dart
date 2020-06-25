@@ -21,6 +21,7 @@ class _MyPageState extends State<MyPage> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text(
             '我的',
             style: TextStyle(

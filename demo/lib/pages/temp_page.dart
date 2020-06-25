@@ -19,6 +19,7 @@ class _TempPageState extends State<TempPage> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         // 自定义返回按钮(需要实现返回事件)
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
