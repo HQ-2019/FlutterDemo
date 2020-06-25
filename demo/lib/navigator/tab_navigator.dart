@@ -1,6 +1,6 @@
-import 'package:demo/pages/HomePage.dart';
-import 'package:demo/pages/NewsPage.dart';
-import 'package:demo/pages/MyPage.dart';
+import 'package:demo/pages/home_page.dart';
+import 'package:demo/pages/my_page.dart';
+import 'package:demo/pages/news_page.dart';
 import 'package:flutter/material.dart';
 
 class TabNavigator extends StatefulWidget {
@@ -17,6 +17,7 @@ class TabNavigator extends StatefulWidget {
 class _TabNavigatorState extends State<TabNavigator> {
   // tabbar默认状态颜色
   final _normalColor = Colors.grey;
+
   // tabbar选中状态颜色
   final _seletedColor = Colors.yellow.shade900;
 
@@ -35,12 +36,10 @@ class _TabNavigatorState extends State<TabNavigator> {
   // 当前显示的控制器
   final PageController _controller = PageController(
     initialPage: 0, // 默认显示第1个
+    viewportFraction: 1, // 设置页面宽度占比（默认1占满全屏）
   );
 
-  /*
-   * 初始化数据源
-   * @author huangqun by 2019/9/27.
-   */
+  // 初始化数据源
   void initData() {
     _iconList = [
       [
@@ -71,66 +70,30 @@ class _TabNavigatorState extends State<TabNavigator> {
 
   @override
   Widget build(BuildContext context) {
+    initData();
     // TODO: implement build
     return Scaffold(
-      body: buildPageView(),  // 构建页面
-      bottomNavigationBar: buildBottomNavigationBar(),  // 构建底部导航器
+      body: buildPageView(), // 构建页面
+      bottomNavigationBar: buildBottomNavigationBar(), // 构建底部导航器
     );
   }
 
-  // 测试代码
-  List<Widget> testPageView() {
-    return <Widget>[
-      Container(
-        color: Colors.yellow,
-        child: Center(
-          child: Text(
-            '第一个pageView',
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
-          ),
-        ),
-      ),
-      Container(
-        color: Colors.red,
-        child: Center(
-          child: Text(
-            '第二个pageView',
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
-          ),
-        ),
-      ),
-      Container(
-        color: Colors.green,
-        child: Center(
-          child: Text(
-            '第三个pageView',
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
-          ),
-        ),
-      )
-    ];
-  }
 
-  /*
-   * 创建page页面
-   * @author huangqun by 2019/9/27.
-   */
+  // 创建page页面
   Widget buildPageView() {
     return PageView(
       controller: _controller,
       physics: NeverScrollableScrollPhysics(), // 禁止滚动
       children: _pageList,
 //        children: testPageView(),
-      onPageChanged: (index) {
-        print('页面切换到 index ${index}');
-      },
+//      onPageChanged: (index) {
+//        print('页面切换到 index ${index}');
+//        setState(() {});
+//      },
     );
   }
 
-  /*
-   * 创建底部导航器
-   * @author huangqun by 2019/9/27.
-   */
+  // 创建底部导航器
   Widget buildBottomNavigationBar() {
     return BottomNavigationBar(
       currentIndex: _currentIndex,
@@ -166,10 +129,7 @@ class _TabNavigatorState extends State<TabNavigator> {
     );
   }
 
-  /*
-   * 获取对应索引的tabar文本
-   * @author huangqun by 2019-08-14.
-   */
+  // 获取对应索引的tabar文本
   Text getTabTitle(int index) {
     return Text(
       _titleList[index],
@@ -179,19 +139,14 @@ class _TabNavigatorState extends State<TabNavigator> {
     );
   }
 
-  /*
-   * 获取对应索引的tabar图标
-   * @author huangqun by 2019-08-14.
-   */
+  // 获取对应索引的tabar图标
   Image getTabIcon(int index) {
     return _currentIndex == index ? _iconList[index][0] : _iconList[index][1];
   }
 
-  /*
-   * 获取对应路径下的图片资源
-   * @author huangqun by 2019-08-14.
-   */
+  // 获取对应路径下的图片资源
   Image getImage(String path) {
     return Image.asset(path, width: 30.0, height: 30.0);
   }
+
 }

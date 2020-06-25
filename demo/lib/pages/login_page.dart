@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:demo/navigator/TabNavigator.dart';
+import 'package:demo/navigator/tab_navigator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +11,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   Timer timer;
 
   final TextEditingController phoneController = TextEditingController();
@@ -40,7 +39,8 @@ class _LoginPageState extends State<LoginPage> {
     // 监听键盘的输入
     verifyCodeController.addListener(() {
       print('验证码输入 ${verifyCodeController.text}');
-      if (phoneController.text.length == 11 && verifyCodeController.text.length == 6) {
+      if (phoneController.text.length == 11 &&
+          verifyCodeController.text.length == 6) {
         requestLogin();
       }
     });
@@ -52,20 +52,19 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // 防止弹出键盘后页面布局超出屏幕
       body: SafeArea(
-        // 使用SafeArea来避免iPhoneX刘海覆盖
+          // 使用SafeArea来避免iPhoneX刘海覆盖
           child: Container(
-            // 上边距对iPhone刘海做兼容也可以使用top: MediaQuery.of(context).padding.top + 30
-            padding: EdgeInsets.only(top: 30, left: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                buildTitleView(), // 创建标题视图
-                buildInputView(), // 创建输入区域视图
-                buildAgreementView(), //创建协议区域视图
-              ],
-            ),
-          )
-      ),
+        // 上边距对iPhone刘海做兼容也可以使用top: MediaQuery.of(context).padding.top + 30
+        padding: EdgeInsets.only(top: 30, left: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            buildTitleView(), // 创建标题视图
+            buildInputView(), // 创建输入区域视图
+            buildAgreementView(), //创建协议区域视图
+          ],
+        ),
+      )),
     );
   }
 
@@ -89,8 +88,7 @@ class _LoginPageState extends State<LoginPage> {
             Text('欢迎使用\"Flutter\"',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
           ],
-        )
-    );
+        ));
   }
 
   // 创建输入区域视图
@@ -123,7 +121,8 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 // 使用Expanded包裹输入框，使输入框充满剩余的空间
                 Expanded(
-                  child: buildTextField(controller: phoneController, isPhone: true), // 手机号码输入框
+                  child: buildTextField(
+                      controller: phoneController, isPhone: true), // 手机号码输入框
                 ),
                 buildVerifyButton() // 验证码按钮
               ],
@@ -144,7 +143,8 @@ class _LoginPageState extends State<LoginPage> {
           Text('验证码', style: TextStyle(fontSize: 15, color: Colors.black54)),
           Container(
             margin: EdgeInsets.only(right: 140),
-            child: buildTextField(controller: verifyCodeController, isPhone: false),
+            child: buildTextField(
+                controller: verifyCodeController, isPhone: false),
           )
         ],
       ),
@@ -154,71 +154,73 @@ class _LoginPageState extends State<LoginPage> {
   // 协议区域视图
   Widget buildAgreementView() {
     return Container(
-      padding: EdgeInsets.only(top: 10,right: 30),
-      child: Column(
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                width: 30,
-                height: 30,
-                child: Checkbox(
-                  tristate: true,
-                  value: true,
-                  activeColor: Colors.orange,
-                  onChanged: (bool newValue) {
-                  },
-                ),
-              ),
-              Expanded(
-                child: RichText(
-                  text: TextSpan(
-                    text: '登录即表示同意并接Flutter',
-                    style: TextStyle(color: Colors.black54, fontSize: 14.0),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: '《注册协议》',
-                          style: TextStyle(color: Colors.orange),
-                          recognizer: TapGestureRecognizer()..onTap = () async {
-                            // 点击事件
-                          }
-                      ),
-                      TextSpan(
-                          text: '和'
-                      ),
-                      TextSpan(
-                          text: '《隐私政策》',
-                          style: TextStyle(color: Colors.orange),
-                          recognizer: TapGestureRecognizer()..onTap = () async {
-                            // 点击事件
-                          }
-                      ),
-                    ],
+        padding: EdgeInsets.only(top: 10, right: 30),
+        child: Column(
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  width: 30,
+                  height: 30,
+                  child: Checkbox(
+                    tristate: true,
+                    value: true,
+                    activeColor: Colors.orange,
+                    onChanged: (bool newValue) {},
                   ),
                 ),
-              )
-            ],
-          ),
-        ],
-      )
-    );
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      text: '登录即表示同意并接Flutter',
+                      style: TextStyle(color: Colors.black54, fontSize: 14.0),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: '《注册协议》',
+                            style: TextStyle(color: Colors.orange),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                // 点击事件
+                              }),
+                        TextSpan(text: '和'),
+                        TextSpan(
+                            text: '《隐私政策》',
+                            style: TextStyle(color: Colors.orange),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                // 点击事件
+                              }),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ));
   }
 
   // 文本输入框
   Widget buildTextField({bool isPhone, TextEditingController controller}) {
     return TextField(
-      controller: controller, // 监听键盘输入
-      autofocus: isPhone, // 设置是否自动获取焦点
-      style: TextStyle(color: Colors.orange, fontSize: 18), // 设置字体
-      keyboardType: TextInputType.number, // 键盘类型为数字
+      controller: controller,
+      // 监听键盘输入
+      autofocus: isPhone,
+      // 设置是否自动获取焦点
+      style: TextStyle(color: Colors.orange, fontSize: 18),
+      // 设置字体
+      keyboardType: TextInputType.number,
+      // 键盘类型为数字
       inputFormatters: [
         WhitelistingTextInputFormatter(RegExp("[0-9]")),
         LengthLimitingTextInputFormatter(isPhone ? 11 : 6)
-      ], // 设置输入限制
-      cursorColor: Colors.orange, // 设置光标颜色
+      ],
+      // 设置输入限制
+      cursorColor: Colors.orange,
+      // 设置光标颜色
       decoration: InputDecoration(
         hintText: '请输入',
         hintStyle: TextStyle(color: Colors.black26, fontSize: 15),
@@ -229,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       onChanged: (value) {
         print('输入值变化  value: ${value}');
-      } ,
+      },
     );
   }
 
@@ -247,8 +249,8 @@ class _LoginPageState extends State<LoginPage> {
         elevation: 0,
         highlightElevation: 0,
         shape: RoundedRectangleBorder(
-            side: BorderSide.none,
-            borderRadius: BorderRadius.all(Radius.circular(10)), // 设置圆角
+          side: BorderSide.none,
+          borderRadius: BorderRadius.all(Radius.circular(10)), // 设置圆角
         ),
         child:
             Text('获取验证码', style: TextStyle(color: Colors.white, fontSize: 12)),
@@ -265,7 +267,6 @@ class _LoginPageState extends State<LoginPage> {
     }
     return () {
       print('发送获取验证码请求');
-
     };
   }
 
@@ -275,8 +276,7 @@ class _LoginPageState extends State<LoginPage> {
       try {
         // 重置根视图
         resetRootView();
-      } catch (e) {
-      }
+      } catch (e) {}
     });
   }
 }

@@ -1,5 +1,5 @@
-import 'package:demo/navigator/TabNavigator.dart';
-import 'package:demo/pages/LoginPage.dart';
+import 'package:demo/navigator/tab_navigator.dart';
+import 'package:demo/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
       ),
 //      home: MyHomePage(title: 'Flutter Demo Home Page'),
-//      home: TabNavigator(),
-      home: LoginPage(),
+      home: TabNavigator(),
+//      home: LoginPage(),
     );
   }
 }

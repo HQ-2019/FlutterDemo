@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:demo/pages/SecondPage.dart';
+import 'package:demo/pages/temp_page.dart';
 
 class NewsPage extends StatefulWidget {
   @override
@@ -11,7 +11,6 @@ class NewsPage extends StatefulWidget {
 const APPBAR_SCROLL_OFFSET = 100;
 
 class _NewsPageState extends State<NewsPage> {
-
   //定义一个AppBar 的透明度默认值
   double appBarAlpha = 0;
 
@@ -24,48 +23,47 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // 使用Stack 的作用就是让AppBar 叠加在上面
+        // 使用Stack 的作用就是让AppBar 叠加在上面
         body: Stack(
-          children: <Widget>[
-            // MediaQuery.removePadding 移除顶部的 padding
-            MediaQuery.removePadding(
-              removeTop: true,
-              context: context,
-              // 监听列表的滚动
-              child: NotificationListener(
-                // 滚动的回调
-                onNotification: (scrollNotifation){
-                  // 判断ListView滚动的效果
-                  if (scrollNotifation is ScrollUpdateNotification && scrollNotifation.depth == 0){
-                    // 滚动且是列表滚动的的的时候
-                    double offset =  scrollNotifation.metrics.pixels;
-                    print('offset：${offset} ');
-                    double alpha =  offset / APPBAR_SCROLL_OFFSET;
-                    if (offset <= 0) {
-                      alpha = 0;
-                    } else if (offset >= APPBAR_SCROLL_OFFSET) {
-                      alpha = 1;
-                    }
+      children: <Widget>[
+        // MediaQuery.removePadding 移除顶部的 padding
+        MediaQuery.removePadding(
+          removeTop: true,
+          context: context,
+          // 监听列表的滚动
+          child: NotificationListener(
+            // 滚动的回调
+            onNotification: (scrollNotifation) {
+              // 判断ListView滚动的效果
+              if (scrollNotifation is ScrollUpdateNotification &&
+                  scrollNotifation.depth == 0) {
+                // 滚动且是列表滚动的的的时候
+                double offset = scrollNotifation.metrics.pixels;
+                print('offset：${offset} ');
+                double alpha = offset / APPBAR_SCROLL_OFFSET;
+                if (offset <= 0) {
+                  alpha = 0;
+                } else if (offset >= APPBAR_SCROLL_OFFSET) {
+                  alpha = 1;
+                }
 
-                    // 更新UI状态
-                    setState(() {
-                      appBarAlpha = alpha;
-                    });
-                    print('alpha: ${alpha} ');
-                  }
-                  return true;
-                },
-                // 创建列表UI
-                child: buildListView(),
-              ),
-            ),
+                // 更新UI状态
+                setState(() {
+                  appBarAlpha = alpha;
+                });
+                print('alpha: ${alpha} ');
+              }
+              return true;
+            },
+            // 创建列表UI
+            child: buildListView(),
+          ),
+        ),
 
-            // 创建AppBar
-            buildAppBar(),
-          ],
-
-        )
-    );
+        // 创建AppBar
+        buildAppBar(),
+      ],
+    ));
   }
 
   // 创建一个能够改变透明度的导航栏
@@ -75,18 +73,16 @@ class _NewsPageState extends State<NewsPage> {
       opacity: appBarAlpha,
       child: Container(
         height: 80,
-        decoration: BoxDecoration(
-            color: Colors.orange
-        ),
+        decoration: BoxDecoration(color: Colors.orange),
         child: Center(
-          child: Padding(padding: EdgeInsets.only(top: 20),
+          child: Padding(
+            padding: EdgeInsets.only(top: 20),
             child: Text(
               '热门资讯',
               style: TextStyle(
                   fontSize: 17.0,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(255, 255, 255, appBarAlpha)
-              ),
+                  color: Color.fromRGBO(255, 255, 255, appBarAlpha)),
             ),
           ),
         ),
@@ -98,7 +94,6 @@ class _NewsPageState extends State<NewsPage> {
     return ListView.builder(
       itemCount: 20,
       itemBuilder: (context, index) {
-
         // 列表第一个放banner
         if (index == 0) {
           return buildBanner();
@@ -115,10 +110,8 @@ class _NewsPageState extends State<NewsPage> {
                 CupertinoPageRoute<void>(
                     maintainState: false, //  是否前一个路由将保留在内存中
                     builder: (BuildContext context) {
-                      return SecondPage(title: 'ssssss');
-                    }
-                )
-            );
+                      return TempPage(title: 'ssssss');
+                    }));
           },
         );
       },
@@ -129,10 +122,10 @@ class _NewsPageState extends State<NewsPage> {
   Widget buildBanner() {
     return Container(
       height: 200,
-      child:Swiper(
+      child: Swiper(
         itemCount: _imgUrls.length,
         autoplay: true,
-        itemBuilder: (BuildContext context,int index){
+        itemBuilder: (BuildContext context, int index) {
           // 获取图片
           return Image.network(
             _imgUrls[index],
