@@ -19,13 +19,15 @@ class _TempPageState extends State<TempPage> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        // 返回按钮
+        // 自定义返回按钮(需要实现返回事件)
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        // 返回按钮（有默认返回事件）
+//        leading: BackButton(color: Colors.white),
         // 标题
         title: Text(
           widget.title,

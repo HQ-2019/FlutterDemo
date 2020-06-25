@@ -1,3 +1,5 @@
+import 'package:demo/pages/web_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -54,33 +56,21 @@ class _HomePageState extends State<HomePage> {
                         }
                         return true;
                       },
-                      child: ListView(children: <Widget>[
-                        new ListTile(
-                          leading: Icon(Icons.label_important),
-                          title: Text('label_important'),
-                          subtitle: Text('label_important'),
-                        ),
-                        new ListTile(
-                          leading: Icon(Icons.gamepad),
-                          title: Text('gamepad'),
-                          subtitle: Text('gamepad'),
-                        ),
-                        new ListTile(
-                          leading: Icon(Icons.verified_user),
-                          title: Text('verified_user'),
-                          subtitle: Text('verified_user'),
-                        ),
-                        new ListTile(
-                          leading: Icon(Icons.dashboard),
-                          title: Text('dashboard'),
-                          subtitle: Text('dashboard'),
-                        ),
-                        new ListTile(
-                          leading: Icon(Icons.security),
-                          title: Text('security'),
-                          subtitle: Text('security'),
-                        ),
-                      ]),
+                      child: ListView.builder(
+                          itemCount: 50,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              leading: Icon(Icons.label_important),
+                              title: Text('label_important'),
+                              subtitle: Text('label_important'),
+                              onTap: () {
+                                Navigator.push(context, CupertinoPageRoute(
+                                    builder: (BuildContext context) {
+                                  return WebPage();
+                                }));
+                              },
+                            );
+                          }),
                     )))
           ],
         ),
@@ -113,6 +103,13 @@ class _HomePageState extends State<HomePage> {
         // 页码
         onTap: (index) {
           print('点击第 ${index} 个banner');
+          Navigator.push(
+              context,
+              CupertinoPageRoute<void>(
+                  maintainState: true,
+                  builder: (BuildContext context) {
+                    return WebPage();
+                  }));
         },
         onIndexChanged: (index) {
           print('切换到第 ${index} 个banner');

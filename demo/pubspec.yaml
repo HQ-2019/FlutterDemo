@@ -27,6 +27,9 @@ dependencies:
   # https://github.com/best-flutter/flutter_swiper
   flutter_swiper : ^1.1.6
 
+  # webView插件
+  webview_flutter : ^0.3.22
+
 
 dev_dependencies:
   flutter_test:
