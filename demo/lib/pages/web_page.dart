@@ -21,6 +21,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 * */
 
 class WebPage extends StatefulWidget {
+  final String url;
+
+  const WebPage({Key key, @required this.url}) : super(key: key);
+
   @override
   _WebPage createState() => _WebPage();
 }
@@ -38,6 +42,7 @@ class _WebPage extends State<WebPage> {
           color: Colors.white,
         ),
 //        iconTheme: IconThemeData(color: Colors.white),
+      centerTitle: true,
         title: Text(
           _title,
           style: TextStyle(
@@ -46,7 +51,7 @@ class _WebPage extends State<WebPage> {
         backgroundColor: Colors.orange,
       ),
       body: WebView(
-        initialUrl: 'https://www.baidu.com',
+        initialUrl: widget.url,
         // 启用javascipt
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (controller) {

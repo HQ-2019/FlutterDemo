@@ -14,6 +14,8 @@ class _HomePageState extends State<HomePage> {
   // banner的默认高度
   double bannerHeight = BANNER_HEIGHT;
 
+  int _count = 20;
+
   final _imageUrlList = [
     'https://img4.mukewang.com/szimg/5d2e7ada09946f6f12000676.jpg',
     'https://img2.mukewang.com/szimg/5c8f014a0904310b02700148.jpg',
@@ -57,16 +59,17 @@ class _HomePageState extends State<HomePage> {
                         return true;
                       },
                       child: ListView.builder(
-                          itemCount: 50,
+                          itemCount: _count,
                           itemBuilder: (context, index) {
+                            print('列表索引 ${index}');
                             return ListTile(
                               leading: Icon(Icons.label_important),
-                              title: Text('label_important'),
-                              subtitle: Text('label_important'),
+                              title: Text('label_important_${index}'),
+                              subtitle: Text('label_important${index}'),
                               onTap: () {
                                 Navigator.push(context, CupertinoPageRoute(
                                     builder: (BuildContext context) {
-                                  return WebPage();
+                                  return WebPage(url: 'https://www.baidu.com');
                                 }));
                               },
                             );
