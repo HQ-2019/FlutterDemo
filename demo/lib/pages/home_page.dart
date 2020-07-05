@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 
 const BANNER_HEIGHT = 200.0; // banner的默认高度
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
   // banner的默认高度
   double bannerHeight = BANNER_HEIGHT;
 
@@ -21,6 +21,10 @@ class _HomePageState extends State<HomePage> {
     'https://img2.mukewang.com/szimg/5c8f014a0904310b02700148.jpg',
     'https://img1.mukewang.com/szimg/5d36a6000837a91d06000338.jpg'
   ];
+
+  /// AutomaticKeepAliveClientMixin实现页面保活状态，切换页面时不会被重置
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -58,22 +62,31 @@ class _HomePageState extends State<HomePage> {
                         }
                         return true;
                       },
-                      child: ListView.builder(
-                          itemCount: _count,
-                          itemBuilder: (context, index) {
-                            print('列表索引 ${index}');
-                            return ListTile(
-                              leading: Icon(Icons.label_important),
-                              title: Text('label_important_${index}'),
-                              subtitle: Text('label_important${index}'),
-                              onTap: () {
-                                Navigator.push(context, CupertinoPageRoute(
-                                    builder: (BuildContext context) {
-                                  return WebPage(url: 'https://www.baidu.com');
-                                }));
-                              },
-                            );
-                          }),
+                      child: ListView.separated(
+                        // 列表采用iOS边缘弹性效果
+                        physics: BouncingScrollPhysics(),
+                        // 列表的item个数
+                        itemCount: _count,
+                        // 列表的item样式
+                        itemBuilder: (context, index) {
+                          print('列表索引 ${index}');
+                          return ListTile(
+                            leading: Icon(Icons.label_important),
+                            title: Text('label_important_${index}'),
+                            subtitle: Text('label_important${index}'),
+                            onTap: () {
+                              Navigator.push(context, CupertinoPageRoute(
+                                  builder: (BuildContext context) {
+                                return WebPage(url: 'https://www.baidu.com');
+                              }));
+                            },
+                          );
+                        },
+                        // 列表分割线
+                        separatorBuilder: (context, index) {
+                          return Divider();
+                        },
+                      ),
                     )))
           ],
         ),

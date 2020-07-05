@@ -22,6 +22,8 @@ class _MyPageState extends State<MyPage> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          backgroundColor: Colors.orange,
+          elevation: 0, // 去掉阴影
           title: Text(
             '我的',
             style: TextStyle(
@@ -29,8 +31,6 @@ class _MyPageState extends State<MyPage> {
                 fontWeight: FontWeight.bold,
                 color: Colors.black),
           ),
-          backgroundColor: Colors.white,
-          elevation: 0, // 去掉阴影
         ),
         body: Container(
           // 设置背景渐变色

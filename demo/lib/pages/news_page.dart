@@ -108,6 +108,8 @@ class _NewsPageState extends State<NewsPage> {
   Widget buildListView() {
     return ListView.builder(
       itemCount: _newsDataList.length + 3,
+      // 列表采用iOS边缘弹性效果
+      physics: BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         // banner列表视图
         if (index == 0) {

@@ -1,5 +1,6 @@
 import 'package:demo/pages/home_page.dart';
 import 'package:demo/pages/my_page.dart';
+import 'package:demo/pages/nested_scrollView_page.dart';
 import 'package:demo/pages/news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +27,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   int _currentIndex = 0;
 
   // tab标题列表
-  final _titleList = ['首页', '资讯', '我的'];
+  final _titleList = ['首页', '资讯', '我的', '列表'];
 
   // tab图标列表
   var _iconList;
@@ -38,6 +39,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   final PageController _controller = PageController(
     initialPage: 0, // 默认显示第1个
     viewportFraction: 1, // 设置页面宽度占比（默认1占满全屏）
+    keepPage: true
   );
 
   // 初始化数据源
@@ -54,10 +56,14 @@ class _TabNavigatorState extends State<TabNavigator> {
       [
         getImage('images/tab_zhangdan_icon_a@3x.png'),
         getImage('images/tab_zhangdan_icon_d@3x.png')
+      ],
+      [
+        getImage('images/tab_zhangdan_icon_a@3x.png'),
+        getImage('images/tab_zhangdan_icon_d@3x.png')
       ]
     ];
 
-    _pageList = [HomePage(), NewsPage(), MyPage()];
+    _pageList = [HomePage(), NewsPage(), MyPage(), NestadSrcollPage()];
   }
 
   //  设置沉浸式状态栏（去除android上的灰色背景,将背景设置为透明的）
@@ -111,6 +117,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   Widget buildBottomNavigationBar() {
     return BottomNavigationBar(
       currentIndex: _currentIndex,
+      type: BottomNavigationBarType.fixed,
       // 设置tabbar点击
       onTap: (index) {
         _controller.jumpToPage(index);
@@ -119,7 +126,7 @@ class _TabNavigatorState extends State<TabNavigator> {
         });
       },
       items: List.generate(
-          3,
+          4,
           (i) => BottomNavigationBarItem(
               icon: getTabIcon(i), title: getTabTitle(i))),
 //          items: [
